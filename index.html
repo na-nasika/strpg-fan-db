@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>四宮伊織TRPGまとめ [非公式]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;800;900&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        body {
+            font-family: 'M PLUS 1p', 'Noto Sans JP', sans-serif;
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        /* 🪶 温かみのあるグレーと赤のスクロールバーへ調整 */
+        ::-webkit-scrollbar-track { background: #f5f5f4; }
+        ::-webkit-scrollbar-thumb { background: #f87171; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ef4444; }
+        [x-cloak] { display: none !important; }
+        
+        /* 📸 html2canvas専用：二列スタジオ */
+        #dynamic-capture-studio {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+            width: 780px; 
+            box-sizing: border-box;
+            background-color: #f5f5f4;
+            padding: 24px;
+            border-radius: 24px;
+        }
+        .studio-grid {
+            display: grid;
+            grid-template-columns: 354px 354px; 
+            gap: 24px;
+            width: 100%;
+        }
+        .studio-grid .capture-hide {
+            display: none !important; 
+        }
+        .studio-middle-cell {
+            display: table-cell !important;
+            vertical-align: middle !important;
+            height: 64px; 
+        }
+    </style>
+</head>
+<body class="bg-stone-100/50 text-slate-800 antialiased selection:bg-stone-200 selection:text-stone-900">
+
+    <div x-data="app()" x-init="initApp()" class="max-w-6xl mx-auto px-4 py-6 sm:py-8" x-cloak>
+        
+        <header class="mb-5 sm:mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-5 border-b border-stone-200">
+            <div class="flex items-center gap-1">
+                <span class="text-2xl inline-block transform rotate-[-12deg] select-none text-red-500 w-8 text-center">❌❌</span>
+                <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-wider">四宮伊織TRPGまとめ</h1>
+                <span class="text-[10px] bg-stone-200 text-stone-700 px-2 py-0.5 rounded-full font-bold border border-stone-300 tracking-wide ml-2">非公式</span>
+            </div>
+            
+            <div class="text-xs text-slate-400 font-medium tracking-tight flex flex-wrap items-center gap-x-4 gap-y-1 sm:justify-end">
+                <div>
+                    該当セッション: <span x-text="filteredStreams().length" class="text-red-600 font-black text-sm"></span> <span class="text-[11px] font-bold text-slate-400">件</span>
+                </div>
+                <div class="hidden sm:block text-stone-300">|</div>
+                <div>
+                    最終更新: <span x-text="formatDateOnly(updatedAt)" class="text-red-600 font-bold"></span>
+                </div>
+            </div>
+        </header>
+
+        <div class="bg-white p-3 sm:p-4 rounded-2xl border border-stone-200 mb-6 space-y-3 shadow-sm">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div>
+                    <input type="text" x-model="searchQuery" placeholder="🔍 シナリオ、PL、PCなど..." class="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition-all">
+                </div>
+
+                <div class="md:col-span-2 flex flex-col sm:flex-row sm:items-center gap-2">
+                    <div class="flex items-center w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-0.5">
+                        <span class="text-[11px] font-bold text-stone-400 mr-2 whitespace-nowrap sm:hidden">開始</span>
+                        <input type="date" x-model="startDate" class="w-full bg-transparent text-sm focus:outline-none py-1 text-slate-600 cursor-pointer">
+                    </div>
+                    <span class="text-stone-400 text-xs font-bold text-center hidden sm:inline">〜</span>
+                    <div class="flex items-center w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-0.5">
+                        <span class="text-[11px] font-bold text-stone-400 mr-2 whitespace-nowrap sm:hidden">終了</span>
+                        <input type="date" x-model="endDate" class="w-full bg-transparent text-sm focus:outline-none py-1 text-slate-600 cursor-pointer">
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-2.5 border-t border-stone-100 text-xs">
+                <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                    <div class="inline-flex gap-1 bg-stone-50 p-1 rounded-xl border border-stone-200">
+                        <button @click="toggleRole('gm')" :class="ioriRole === 'gm' ? 'bg-red-500 text-white font-bold shadow-sm' : 'text-slate-600 hover:bg-stone-200/50'" class="px-3 py-1 rounded-lg transition-all cursor-pointer">GM</button>
+                        <button @click="toggleRole('pl')" :class="ioriRole === 'pl' ? 'bg-red-500 text-white font-bold shadow-sm' : 'text-slate-600 hover:bg-stone-200/50'" class="px-3 py-1 rounded-lg transition-all cursor-pointer">PL</button>
+                    </div>
+
+                    <div class="inline-flex gap-1 bg-stone-50 p-1 rounded-xl border border-stone-200">
+                        <button @click="toggleStatus('watched')" :class="selectedStatus === 'watched' ? 'bg-red-500 text-white font-bold shadow-sm' : 'text-slate-600 hover:bg-stone-200/50'" class="px-3 py-1 rounded-lg transition-all cursor-pointer">✅ 視聴済み</button>
+                        <button @click="toggleStatus('unwatched')" :class="selectedStatus === 'unwatched' ? 'bg-red-500 text-white font-bold shadow-sm' : 'text-slate-600 hover:bg-stone-200/50'" class="px-3 py-1 rounded-lg transition-all cursor-pointer">⬜ 未視聴</button>
+                    </div>
+
+                    <button @click="toggleFavoriteFilter()" :class="showFavoritesOnly ? 'bg-red-500 text-white font-bold border-red-500 shadow-sm' : 'border-stone-300 text-slate-600 hover:bg-stone-50'" class="border px-3 py-1 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer">
+                        <span class="w-2 h-2 rounded-full transition-colors" :class="showFavoritesOnly ? 'bg-white' : 'bg-red-400'"></span>
+                        <span>お気に入り</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2 ml-auto sm:ml-0">
+                    <template x-if="showFavoritesOnly && filteredStreams().length > 0">
+                        <button @click="downloadAsImage()" class="bg-slate-800 hover:bg-slate-700 text-white font-medium px-3 py-1 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
+                            <span>📸 画像で保存</span>
+                        </button>
+                    </template>
+
+                    <button @click="toggleSortOrder()" class="border border-stone-300 hover:bg-stone-50 text-slate-600 font-medium px-3 py-1 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer">
+                        <span x-text="sortOrder === 'desc' ? '📅 新しい順' : '📅 古い順'"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-card-container" class="block md:hidden space-y-4">
+            <template x-for="stream in filteredStreams()" :key="'card-'+stream.id">
+                <div @click="openModal(stream)" class="bg-white rounded-2xl border border-stone-200 p-4 shadow-sm space-y-3 transition-colors cursor-pointer relative" :class="isWatched(stream.id) ? 'bg-stone-50/60' : ''">
+                    
+                    <div class="flex items-center justify-between border-b border-stone-100 pb-2">
+                        <div class="flex items-center gap-2">
+                            <button @click.stop="toggleFavorite(stream.id)" class="p-1 -ml-1 focus:outline-none cursor-pointer" title="お気に入り">
+                                <div class="w-2.5 h-2.5 rounded-full border transition-all duration-200" 
+                                     :class="isFavorite(stream.id) ? 'bg-red-400 border-red-400' : 'bg-slate-100 border-slate-200 hover:bg-red-100'"></div>
+                            </button>
+                            <span class="text-xs text-slate-400 font-medium" x-text="stream.date"></span>
+                        </div>
+                        <label class="capture-hide flex items-center gap-1.5 text-xs text-slate-500 cursor-pointer select-none" @click.stop>
+                            <input type="checkbox" :checked="isWatched(stream.id)" @change="toggleWatched(stream.id)" class="w-4 h-4 rounded border-stone-300 text-red-500 focus:ring-red-400 cursor-pointer accent-red-500">
+                            <span class="text-[11px]" x-text="isWatched(stream.id) ? '視聴済み' : '未視聴'"></span>
+                        </label>
+                    </div>
+
+                    <div class="flex gap-3 items-center">
+                        <template x-if="getYoutubeId(stream.links)">
+                            <div class="w-28 shrink-0 aspect-video h-[64px] bg-stone-50 rounded-lg overflow-hidden border border-stone-200 shadow-sm">
+                                <img :src="'https://img.youtube.com/vi/' + getYoutubeId(stream.links) + '/mqdefault.jpg'" alt="Thumbnail" class="w-full h-full object-cover">
+                            </div>
+                        </template>
+                        <template x-if="!getYoutubeId(stream.links)">
+                            <div class="w-28 shrink-0 aspect-video h-[64px] bg-stone-50 rounded-lg flex items-center justify-center border border-stone-200">
+                                <span class="text-[10px] text-stone-400 font-bold">NO IMAGE</span>
+                            </div>
+                        </template>
+                        
+                        <div class="studio-middle-cell flex-1 min-w-0" style="display: table-cell; vertical-align: middle;">
+                            <div class="font-bold text-slate-900 tracking-wide text-xs sm:text-sm leading-snug break-words" x-text="stream.scenario"></div>
+                            <div class="mt-0.5 leading-none">
+                                <span class="inline-block bg-slate-100 text-slate-500 text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded-md font-medium" x-text="stream.system"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-2 pt-1" @click.stop>
+                        <div class="text-[11px] text-slate-500 truncate flex items-center pt-0.5 pb-1 leading-loose">
+                            <span class="font-bold text-slate-400 mr-1 select-none">GM:</span> 
+                            <span class="font-bold text-slate-700" x-text="stream.gm"></span>
+                        </div>
+                        <div class="capture-hide flex flex-col gap-1 w-24 shrink-0 text-center">
+                            <template x-for="link in stream.links">
+                                <a :href="link.url" target="_blank" class="inline-block w-full bg-red-500 hover:bg-red-600 text-white text-[10px] py-1 px-1.5 rounded-lg font-medium transition-colors shadow-sm" x-text="link.label"></a>
+                            </template>
+                            <template x-if="stream.hashtag">
+                                <a :href="'https://x.com/search?q=' + encodeURIComponent('#' + stream.hashtag)" target="_blank" class="inline-block w-full bg-slate-700 hover:bg-slate-600 text-white text-[9px] py-0.5 px-1.5 rounded-lg font-normal transition-colors overflow-hidden text-ellipsis whitespace-nowrap" x-text="stream.hashtag"></a>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="bg-stone-50 rounded-xl p-2.5 text-[11px] border border-stone-200 flex flex-wrap gap-1 mt-1 items-center">
+                        <span class="text-slate-400 font-bold mr-1 shrink-0 select-none">PL:</span>
+                        <div class="flex flex-wrap gap-1 flex-1 items-center">
+                            <template x-for="char in stream.characters">
+                                <span class="bg-white text-stone-800 text-[10px] font-medium px-1.5 py-1 rounded-md border border-stone-200 flex items-center justify-center leading-none text-center">
+                                    <span x-text="char.plName ? char.plName + '（' + char.pcName + '）' : char.pcName"></span>
+                                </span>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <div class="hidden md:block bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[950px]">
+                    <thead>
+                        <tr class="bg-stone-50 border-b border-stone-200 text-xs font-bold text-slate-500 tracking-wider">
+                            <th class="py-4 px-4 w-12 text-center"></th>
+                            <th class="py-4 px-3 w-14 text-center">視聴</th>
+                            <th class="py-4 px-4 w-28">配信日</th>
+                            <th class="py-4 px-4 w-32">サムネイル</th>
+                            <th class="py-4 px-4">シナリオ / システム</th>
+                            <th class="py-4 px-4 w-36">GM</th>
+                            <th class="py-4 px-4">PL (PC)</th>
+                            <th class="py-4 px-4 w-36 text-center">リンク</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-100 text-sm">
+                        <template x-for="stream in filteredStreams()" :key="'table-'+stream.id">
+                            <tr @click="openModal(stream)" class="hover:bg-stone-50/50 transition-colors cursor-pointer" :class="isWatched(stream.id) ? 'bg-stone-50/30' : ''">
+                                <td class="py-4 px-4 text-center" @click.stop>
+                                    <button @click="toggleFavorite(stream.id)" class="p-1 focus:outline-none cursor-pointer" title="お気に入り">
+                                        <div class="w-2.5 h-2.5 rounded-full border mx-auto transition-all duration-200" 
+                                             :class="isFavorite(stream.id) ? 'bg-red-400 border-red-400' : 'bg-slate-100 border-slate-200 hover:bg-red-100'"></div>
+                                    </button>
+                                </td>
+                                <td class="py-4 px-3 text-center" @click.stop>
+                                    <input type="checkbox" :checked="isWatched(stream.id)" @change="toggleWatched(stream.id)" class="w-4 h-4 rounded border-stone-300 text-red-500 focus:ring-red-400 cursor-pointer accent-red-500">
+                                </td>
+                                <td class="py-4 px-4 text-slate-400 font-semibold" x-text="stream.date"></td>
+                                <td class="py-4 px-4">
+                                    <template x-if="getYoutubeId(stream.links)">
+                                        <div class="w-24 aspect-video bg-stone-50 rounded-lg overflow-hidden border border-stone-200 shadow-sm transform hover:scale-105 transition-transform duration-200">
+                                            <img :src="'https://img.youtube.com/vi/' + getYoutubeId(stream.links) + '/mqdefault.jpg'" alt="Thumbnail" class="w-full h-full object-cover">
+                                        </div>
+                                    </template>
+                                    <template x-if="!getYoutubeId(stream.links)">
+                                        <div class="w-24 aspect-video bg-stone-50 rounded-lg flex items-center justify-center border border-stone-200 text-[10px] text-stone-400 font-bold">
+                                            NO IMAGE
+                                        </div>
+                                    </template>
+                                </td>
+                                <td class="py-4 px-4">
+                                    <div class="font-bold text-slate-900 tracking-wide text-[15px] leading-snug" x-text="stream.scenario"></div>
+                                    <span class="inline-block bg-slate-100 text-slate-500 text-xs px-2 py-0.5 rounded-md mt-2 font-medium" x-text="stream.system"></span>
+                                </td>
+                                <td class="py-4 px-4 font-bold text-slate-700" x-text="stream.gm"></td>
+                                <td class="py-4 px-4">
+                                    <div class="flex flex-wrap gap-1.5">
+                                        <template x-for="char in stream.characters">
+                                            <span class="bg-stone-50 text-stone-800 text-xs font-medium px-2.5 py-1 rounded-xl border border-stone-200">
+                                                <span x-text="char.plName ? char.plName + '（' + char.pcName + '）' : char.pcName"></span>
+                                            </span>
+                                        </template>
+                                    </div>
+                                </td>
+                                <td class="py-4 px-4 text-center" @click.stop>
+                                    <div class="flex flex-col gap-1.5 max-w-[120px] mx-auto">
+                                        <template x-for="link in stream.links">
+                                            <a :href="link.url" target="_blank" class="inline-block w-full bg-red-500 hover:bg-red-600 text-white text-[11px] py-1 px-2 rounded-lg font-medium transition-colors shadow-sm tracking-wider" x-text="link.label"></a>
+                                        </template>
+                                        <template x-if="stream.hashtag">
+                                            <a :href="'https://x.com/search?q=' + encodeURIComponent('#' + stream.hashtag)" target="_blank" class="inline-block w-full bg-slate-700 hover:bg-slate-600 text-white text-[10px] py-0.5 px-2 rounded-lg font-normal transition-colors overflow-hidden text-ellipsis whitespace-nowrap" x-text="stream.hashtag"></a>
+                                        </template>
+                                    </div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <template x-if="filteredStreams().length === 0 && updatedAt !== '同期中...'">
+            <div class="bg-white rounded-2xl border border-stone-200 p-12 text-center text-slate-400 font-medium shadow-sm">該当する配信データが見つかりません。</div>
+        </template>
+
+        <div id="dynamic-capture-studio"></div>
+
+        <div x-show="modalOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40" @click.self="closeModal()" style="display: none;">
+            <div class="bg-white rounded-2xl shadow-xl border border-stone-200 max-w-md w-full overflow-hidden flex flex-col max-h-[85vh] relative z-50">
+                <div class="bg-slate-900 px-6 py-4 flex justify-between items-center text-white shrink-0">
+                    <h3 class="font-bold text-sm tracking-wider truncate mr-4" x-text="activeStream.scenario"></h3>
+                    <button @click="closeModal()" class="text-white/60 hover:text-white text-2xl font-light transition-colors leading-none cursor-pointer">&times;</button>
+                </div>
+                
+                <div class="p-6 space-y-4 text-xs sm:text-sm flex-1 overflow-y-auto bg-white">
+                    <template x-if="activeStream.adminNote">
+                        <div class="text-slate-700 bg-stone-50 p-3 rounded-xl border border-stone-200 leading-relaxed font-normal flex gap-1.5 items-start">
+                            <span class="shrink-0 select-none">💡</span>
+                            <div class="whitespace-pre-wrap" x-text="activeStream.adminNote"></div>
+                        </div>
+                    </template>
+
+                    <template x-if="activeStream.relatedLinks && activeStream.relatedLinks.length > 0">
+                        <div class="flex flex-col gap-1.5 pt-1">
+                            <template x-for="rLink in activeStream.relatedLinks">
+                                <a :href="rLink.url" target="_blank" class="inline-block w-full bg-red-500 hover:bg-red-600 text-white text-center text-xs py-2 px-3 rounded-lg font-medium transition-colors shadow-sm" x-text="rLink.label"></a>
+                            </template>
+                        </div>
+                    </template>
+
+                    <div class="space-y-4">
+                        <template x-for="char in activeStream.characters">
+                            <template x-if="char.profile || char.history || char.note || char.charasheetUrl">
+                                <div class="bg-white rounded-xl p-4 border border-stone-200 space-y-3 shadow-2xs">
+                                    <div class="flex items-baseline justify-between flex-wrap gap-x-2 border-b border-stone-100 pb-1.5">
+                                        <div class="font-bold text-slate-800 text-sm sm:text-base">
+                                            👤 <span x-text="char.pcName"></span>
+                                        </div>
+                                        <div class="text-[11px] text-slate-500">
+                                            PL: <span class="font-bold text-slate-600" x-text="char.plName || '未登録'"></span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="text-[11px] sm:text-xs space-y-3 text-slate-600">
+                                        <template x-if="char.profile">
+                                            <div>
+                                                <div class="font-bold text-slate-400 text-[10px] uppercase tracking-wider mb-0.5">プロフィール</div>
+                                                <div class="text-slate-700 bg-stone-50 p-2 rounded-lg border border-stone-200" x-text="char.profile"></div>
+                                            </div>
+                                        </template>
+
+                                        <template x-if="char.history">
+                                            <div>
+                                                <div class="font-bold text-slate-400 text-[10px] uppercase tracking-wider mb-1">通過済みシナリオ</div>
+                                                <div class="grid grid-cols-1 gap-1.5">
+                                                    <template x-for="line in parseHistoryLinks(char.history)">
+                                                        <template x-if="line.url">
+                                                            <a :href="line.url" target="_blank" class="flex items-center justify-between w-full bg-red-50 hover:bg-stone-100 text-stone-800 font-bold px-3 py-2 rounded-xl border border-stone-300 transition-colors text-left text-xs">
+                                                                <span x-text="'🔗 ' + line.title"></span>
+                                                                <span class="text-[10px] font-normal text-stone-400">↗</span>
+                                                            </a>
+                                                        </template>
+                                                        <template x-if="!line.url">
+                                                            <div class="text-slate-700 bg-stone-50 px-3 py-2 rounded-xl border border-stone-200 font-medium" x-text="line.title"></div>
+                                                        </template>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </template>
+
+                                        <template x-if="char.note">
+                                            <div>
+                                                <div class="font-bold text-slate-400 text-[10px] uppercase tracking-wider mb-0.5">メモ</div>
+                                                <div class="text-slate-700 bg-stone-50 p-2 rounded-lg border border-stone-200 whitespace-pre-wrap" x-text="char.note"></div>
+                                            </div>
+                                        </template>
+
+                                        <template x-if="char.charasheetUrl">
+                                            <div class="pt-1">
+                                                <a :href="char.charasheetUrl" target="_blank" class="inline-flex items-center gap-1 text-red-500 font-bold hover:underline">
+                                                    <span>キャラクターシートを見る</span>
+                                                    <span class="text-[10px]">↗</span>
+                                                </a>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function app() {
+            return {
+                updatedAt: "同期中...",
+                streams: [],
+                searchQuery: "",
+                ioriRole: "all", // 🛠️ 旧 kosakaRole から変数名を刷新
+                selectedStatus: "all",
+                startDate: "",
+                endDate: "",
+                sortOrder: "desc",
+                watchedIds: [],
+                favoriteIds: [],
+                showFavoritesOnly: false,
+                modalOpen: false,
+                activeStream: {},
+
+                async initApp() {
+                    const savedWatched = localStorage.getItem('trpg_watched_ids');
+                    if (savedWatched) this.watchedIds = JSON.parse(savedWatched);
+
+                    const savedFavs = localStorage.getItem('trpg_fav_ids');
+                    if (savedFavs) this.favoriteIds = JSON.parse(savedFavs);
+                    
+                    try {
+                        const response = await fetch('https://na-nasika.github.io/strpg-fan-db/data.json');
+                        if (!response.ok) throw new Error('データが見つかりません');
+                        const data = await response.json();
+                        
+                        this.streams = data.streams;
+                        this.updatedAt = data.updatedAt;
+                    } catch (error) {
+                        console.error("データの読み込みに失敗しました:", error);
+                        this.updatedAt = "読み込みエラー";
+                    }
+                },
+
+                formatDateOnly(dateTimeStr) {
+                    if (!dateTimeStr || dateTimeStr === "同期中..." || dateTimeStr === "読み込みエラー") return dateTimeStr;
+                    return dateTimeStr.split(" ")[0];
+                },
+
+                parseHistoryLinks(text) {
+                    if (!text) return [];
+                    return text.split('\n').map(line => {
+                        const cleanLine = line.replace(/^[・\-\*\s]+/, '').trim();
+                        if (!cleanLine) return null;
+
+                        let title = cleanLine;
+                        let url = null;
+
+                        const httpIndex = cleanLine.indexOf('http');
+                        if (httpIndex !== -1) {
+                            title = cleanLine.substring(0, httpIndex).replace(/[:：\s]+$/, '').trim();
+                            url = cleanLine.substring(httpIndex).trim();
+                        }
+
+                        return { title: title || '配信リンク', url: url };
+                    }).filter(Boolean);
+                },
+
+                getYoutubeId(links) {
+                    if (!links || links.length === 0) return null;
+                    const ytLink = links.find(l => l.url && (l.url.includes('youtube.com') || l.url.includes('youtu.be')));
+                    if (!ytLink || !ytLink.url) return null;
+                    const url = ytLink.url.trim();
+                    if (url.includes('watch?v=')) {
+                        const parts = url.split('v=');
+                        if (parts[1]) return parts[1].split('&')[0];
+                    }
+                    const pathTypes = ['/live/', '/shorts/', '/embed/'];
+                    for (const type of pathTypes) {
+                        if (url.includes(type)) {
+                            const parts = url.split(type);
+                            if (parts[1]) return parts[1].split('?')[0].split('&')[0];
+                        }
+                    }
+                    if (url.includes('youtu.be/')) {
+                        const parts = url.split('youtu.be/');
+                        if (parts[1]) return parts[1].split('?')[0].split('&')[0];
+                    }
+                    return null;
+                },
+
+                toggleRole(role) {
+                    this.ioriRole = this.ioriRole === role ? "all" : role;
+                },
+
+                toggleStatus(status) {
+                    this.selectedStatus = this.selectedStatus === status ? "all" : status;
+                },
+
+                toggleSortOrder() {
+                    this.sortOrder = this.sortOrder === 'desc' ? 'asc' : 'desc';
+                },
+
+                toggleFavoriteFilter() {
+                    this.showFavoritesOnly = !this.showFavoritesOnly;
+                },
+
+                filteredStreams() {
+                    let result = this.streams.filter(stream => {
+                        const query = this.searchQuery.toLowerCase();
+                        const matchQuery = !query || 
+                            stream.scenario.toLowerCase().includes(query) ||
+                            stream.system.toLowerCase().includes(query) ||
+                            stream.gm.toLowerCase().includes(query) ||
+                            (stream.adminNote && stream.adminNote.toLowerCase().includes(query)) ||
+                            (stream.hashtag && stream.hashtag.toLowerCase().includes(query)) ||
+                            stream.characters.some(c => 
+                                (c.pcName && c.pcName.toLowerCase().includes(query)) || 
+                                (c.plName && c.plName.toLowerCase().includes(query))
+                            );
+
+                        // 🛠️ 「四宮伊織」を基準にした絞り込みロジックへ変更
+                        let matchIori = true;
+                        if (this.ioriRole === 'gm') {
+                            matchIori = stream.gm.includes('四宮伊織');
+                        } else if (this.ioriRole === 'pl') {
+                            matchIori = stream.characters.some(c => c.plName && c.plName.includes('四宮伊織'));
+                        }
+
+                        let matchDate = true;
+                        const streamDateStr = stream.date.replace(/\//g, '-');
+                        if (this.startDate && streamDateStr < this.startDate) matchDate = false;
+                        if (this.endDate && streamDateStr > this.endDate) matchDate = false;
+                        
+                        let matchStatus = true;
+                        const watched = this.isWatched(stream.id);
+                        if (this.selectedStatus === 'watched') matchStatus = watched;
+                        if (this.selectedStatus === 'unwatched') matchStatus = !watched;
+
+                        let matchFav = true;
+                        if (this.showFavoritesOnly) matchFav = this.isFavorite(stream.id);
+
+                        return matchQuery && matchIori && matchDate && matchStatus && matchFav;
+                    });
+
+                    return result.sort((a, b) => {
+                        const dateA = new Date(a.date);
+                        const dateB = new Date(b.date);
+                        return this.sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
+                    });
+                },
+
+                isWatched(id) {
+                    return this.watchedIds.includes(id);
+                },
+
+                toggleWatched(id) {
+                    if (this.isWatched(id)) {
+                        this.watchedIds = this.watchedIds.filter(wId => wId !== id);
+                    } else {
+                        this.watchedIds.push(id);
+                    }
+                    localStorage.setItem('trpg_watched_ids', JSON.stringify(this.watchedIds));
+                },
+
+                isFavorite(id) {
+                    return this.favoriteIds.includes(id);
+                },
+
+                toggleFavorite(id) {
+                    if (this.isFavorite(id)) {
+                        this.favoriteIds = this.favoriteIds.filter(fId => fId !== id);
+                    } else {
+                        this.favoriteIds.push(id);
+                    }
+                    localStorage.setItem('trpg_fav_ids', JSON.stringify(this.favoriteIds));
+                },
+
+                // 📸 画像の保存ロジック（背景色のみウォームグレーに合わせて調整）
+                async downloadAsImage() {
+                    const studio = document.getElementById('dynamic-capture-studio');
+                    const originContainer = document.getElementById('mobile-card-container');
+                    if (!studio || !originContainer) return;
+                    
+                    studio.innerHTML = '';
+                    
+                    const gridWrapper = document.createElement('div');
+                    gridWrapper.className = 'studio-grid';
+                    
+                    const activeCards = Array.from(originContainer.children).filter(el => el.tagName === 'DIV');
+                    
+                    if (activeCards.length === 0) {
+                        alert("保存するカードがありません。");
+                        return;
+                    }
+                    
+                    activeCards.forEach(card => {
+                        const clonedCard = card.cloneNode(true);
+                        clonedCard.style.width = '354px';
+                        clonedCard.style.maxWidth = '354px';
+                        gridWrapper.appendChild(clonedCard);
+                    });
+                    
+                    studio.appendChild(gridWrapper);
+                    
+                    try {
+                        const canvas = await html2canvas(studio, {
+                            useCORS: true, 
+                            backgroundColor: '#f5f5f4', 
+                            scale: 2, 
+                            logging: false,
+                            letterRendering: false,
+                            onclone: (clonedDoc) => {
+                                const targetStudio = clonedDoc.getElementById('dynamic-capture-studio');
+                                if (targetStudio) {
+                                    targetStudio.style.position = 'static';
+                                    targetStudio.style.top = '0';
+                                    targetStudio.style.left = '0';
+                                }
+                            }
+                        });
+                        
+                        const link = document.createElement('a');
+                        link.download = `iori_trpg_favorites_${new Date().toISOString().slice(0,10)}.png`;
+                        link.href = canvas.toDataURL('image/png');
+                        link.click();
+                    } catch (error) {
+                        console.error("画像の生成に失敗しました:", error);
+                        alert("画像の保存中にエラーが発生しました。");
+                    } finally {
+                        studio.innerHTML = '';
+                    }
+                },
+
+                openModal(streamData) {
+                    this.activeStream = streamData;
+                    this.modalOpen = true;
+                },
+
+                closeModal() {
+                    this.modalOpen = false;
+                    this.activeStream = {};
+                }
+            }
+        }
+    </script>
+</body>
+</html>
