@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026/07/04 20:46",
+  "updatedAt": "2026/07/04 20:51",
   "streams": [
     {
       "id": "stream_1",
@@ -47,7 +47,7 @@
       "id": "stream_2",
       "date": "2026/07/03",
       "scenario": "囚職都市ネオトーキョー",
-      "system": "CoC7版",
+      "system": "CoC6版",
       "gm": "ヨシヅキ参謀",
       "characters": [
         {
@@ -153,7 +153,7 @@
       "id": "stream_5",
       "date": "2026/04/28",
       "scenario": "燃ゆる金魚鉢",
-      "system": "CoC7版",
+      "system": "CoC6版",
       "gm": "さけこ。",
       "characters": [
         {
@@ -245,7 +245,7 @@
       "id": "stream_7",
       "date": "2026/04/13",
       "scenario": "汝ら探索せよ",
-      "system": "CoC7版",
+      "system": "CoC6版",
       "gm": "まだら牛",
       "characters": [
         {
@@ -287,7 +287,7 @@
           "url": "本編:https://www.youtube.com/watch?v=JR9tjN0LUUI"
         }
       ],
-      "hashtag": "",
+      "hashtag": "シリ笑組探索せよ",
       "adminNote": "",
       "relatedLinks": []
     },
@@ -295,7 +295,7 @@
       "id": "stream_8",
       "date": "2026/04/10",
       "scenario": "虚構水銀注射 -Mercurius Injection-",
-      "system": "CoC7版",
+      "system": "CoC6版",
       "gm": "ひよりん*",
       "characters": [
         {
