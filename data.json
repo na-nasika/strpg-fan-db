@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026/07/04 22:05",
+  "updatedAt": "2026/07/15 11:19",
   "streams": [
     {
       "id": "stream_1",
       "date": "2026/07/04",
-      "scenario": "クトゥルフ神話TRPG「秘刀湯煙銘」",
+      "scenario": "秘刀湯煙銘",
       "system": "CoC6版",
       "gm": "高生紳士",
       "characters": [
@@ -31,12 +31,8 @@
           "url": "https://www.youtube.com/watch?v=RfWspkjSCak"
         },
         {
-          "label": "中編",
-          "url": "https://www.youtube.com/watch?v=ZWuHNl9mJ5A"
-        },
-        {
           "label": "後編",
-          "url": "https://www.youtube.com/watch?v=l4W_FIlN-DY"
+          "url": "https://www.youtube.com/watch?v=ZWuHNl9mJ5A"
         }
       ],
       "hashtag": "たかみや秘刀湯",
@@ -145,7 +141,7 @@
           "url": "https://www.youtube.com/watch?v=VLowRk6tDr0"
         }
       ],
-      "hashtag": "",
+      "hashtag": "四宮パニック",
       "adminNote": "",
       "relatedLinks": []
     },
@@ -207,24 +203,24 @@
       "gm": "九畝くぜ",
       "characters": [
         {
-          "pcName": "四宮伊織()",
-          "plName": "",
+          "pcName": "象",
+          "plName": "四宮伊織",
           "history": "",
           "profile": "",
           "charasheetUrl": "",
           "note": ""
         },
         {
-          "pcName": "紺野和泉()",
-          "plName": "",
+          "pcName": "江浦杏",
+          "plName": "紺野和泉",
           "history": "",
           "profile": "",
           "charasheetUrl": "",
           "note": ""
         },
         {
-          "pcName": "彩音れおん()",
-          "plName": "",
+          "pcName": "令和の飛び出し坊や",
+          "plName": "彩音れおん",
           "history": "",
           "profile": "",
           "charasheetUrl": "",
@@ -413,16 +409,16 @@
       "gm": "すぎうらきりと",
       "characters": [
         {
-          "pcName": "藍月なくる()",
-          "plName": "",
+          "pcName": "葉加瀬真鈴",
+          "plName": "四宮伊織",
           "history": "",
           "profile": "",
           "charasheetUrl": "",
           "note": ""
         },
         {
-          "pcName": "四宮伊織()",
-          "plName": "",
+          "pcName": "不二美雨美",
+          "plName": "藍月なくる",
           "history": "",
           "profile": "",
           "charasheetUrl": "",
@@ -447,8 +443,32 @@
       "gm": "スイ",
       "characters": [
         {
-          "pcName": "四宮伊織、棗いつき、ひよりん*、さけこ。",
-          "plName": "",
+          "pcName": "高峰縁",
+          "plName": "四宮伊織",
+          "history": "",
+          "profile": "",
+          "charasheetUrl": "",
+          "note": ""
+        },
+        {
+          "pcName": "宝徳葵",
+          "plName": "棗いつき",
+          "history": "",
+          "profile": "",
+          "charasheetUrl": "",
+          "note": ""
+        },
+        {
+          "pcName": "三田マヒナ黄楊",
+          "plName": "ひよりん*",
+          "history": "",
+          "profile": "",
+          "charasheetUrl": "",
+          "note": ""
+        },
+        {
+          "pcName": "招奇好心",
+          "plName": "さけこ。",
           "history": "",
           "profile": "",
           "charasheetUrl": "",
@@ -1881,7 +1901,7 @@
     {
       "id": "stream_58",
       "date": "2025/02/16",
-      "scenario": "｜ショートショート・ホラーショット",
+      "scenario": "ショートショート・ホラーショット",
       "system": "CoC6版",
       "gm": "necoze",
       "characters": [],
@@ -2092,9 +2112,9 @@
     {
       "id": "stream_67",
       "date": "2024/12/22",
-      "scenario": "イマーシブモード世界最速",
+      "scenario": "",
       "system": "CoC6版",
-      "gm": "白夜 零兎 / Shiroya Reito",
+      "gm": "白夜零兎",
       "characters": [],
       "links": [
         {
@@ -3973,7 +3993,7 @@
           "url": "本編:https://www.youtube.com/watch?v=To-9QYwPFsI"
         }
       ],
-      "hashtag": "オムニ屋、くぜくぜ卓、新クトゥルフ神話TRPG、肉声セッション",
+      "hashtag": "",
       "adminNote": "",
       "relatedLinks": []
     },
@@ -4040,7 +4060,7 @@
           "url": "https://www.youtube.com/watch?v=AKJ5AvT4zpI"
         }
       ],
-      "hashtag": "クトゥルフ神話TRPG、川犬、クトゥルフ、川出犬流、ホラー、肉声セッション、CoC、神ゲー、VTuber",
+      "hashtag": "",
       "adminNote": "",
       "relatedLinks": []
     },
@@ -4231,7 +4251,7 @@
           "url": "本編:https://www.youtube.com/watch?v=qhnYuO-yehw"
         }
       ],
-      "hashtag": "くぜくぜ卓、闇嗤あしこし、オムニ屋、クトゥルフ神話TRPG、肉声セッション",
+      "hashtag": "闇嗤あしこし",
       "adminNote": "",
       "relatedLinks": []
     },
@@ -4286,7 +4306,7 @@
           "url": "本編:https://www.youtube.com/watch?v=1X7kvwook5I"
         }
       ],
-      "hashtag": "おきくら14、おきがるTRPG倶楽部",
+      "hashtag": "おきくら14",
       "adminNote": "",
       "relatedLinks": []
     },
@@ -4312,7 +4332,7 @@
           "url": "本編:https://www.youtube.com/watch?v=v27HuNR9E2E"
         }
       ],
-      "hashtag": "風呂があたたかくなる、漫画家たちで行く水の街、クトゥルフ神話TRPG、風呂が冷えているんだが",
+      "hashtag": "風呂があたたかくなる",
       "adminNote": "",
       "relatedLinks": []
     },
@@ -4329,7 +4349,7 @@
           "url": "本編:https://www.youtube.com/watch?v=Hlm3FjZ22pg"
         }
       ],
-      "hashtag": "やしのきコーヒー、くぜくぜ卓、オムニ屋、クトゥルフ神話TRPG、肉声セッション",
+      "hashtag": "やしのきコーヒー",
       "adminNote": "",
       "relatedLinks": []
     },
@@ -4363,7 +4383,7 @@
           "url": "本編:https://www.youtube.com/watch?v=Dgqhrz16hqo"
         }
       ],
-      "hashtag": "オムニ屋、くぜくぜ卓、クトゥルフ神話TRPG、肉声セッション",
+      "hashtag": "",
       "adminNote": "",
       "relatedLinks": []
     },
@@ -4561,7 +4581,7 @@
       "date": "2022/09/21",
       "scenario": "春光プレリュード",
       "system": "CoC6版",
-      "gm": "白夜 零兎 / Shiroya Reito",
+      "gm": "白夜 零兎",
       "characters": [],
       "links": [
         {
@@ -4590,7 +4610,7 @@
           "url": "本編:https://www.youtube.com/watch?v=FyTX76rV3xg"
         }
       ],
-      "hashtag": "くぜくぜ卓、腐肉しのんのりゅ、オムニ屋、エモクロアTRPG、肉声セッション",
+      "hashtag": "腐肉しのんのりゅ",
       "adminNote": "",
       "relatedLinks": []
     },
@@ -4607,7 +4627,7 @@
           "url": "本編:https://www.youtube.com/watch?v=XN1wqWzoFns"
         }
       ],
-      "hashtag": "遭難者しのんの、くぜくぜ卓、オムニ屋、クトゥルフ神話TRPG、肉声セッション",
+      "hashtag": "遭難者しのんの",
       "adminNote": "",
       "relatedLinks": []
     },
@@ -4785,7 +4805,7 @@
           "url": "本編:https://www.youtube.com/watch?v=OlSNto2iIx4"
         }
       ],
-      "hashtag": "くぜくぜ卓、腰振りと悪霊、オムニ屋、エモクロアTRPG、肉声セッション",
+      "hashtag": "腰振りと悪霊",
       "adminNote": "",
       "relatedLinks": []
     },
@@ -4802,7 +4822,7 @@
           "url": "本編:https://www.youtube.com/watch?v=U-6wrzQOXKo"
         }
       ],
-      "hashtag": "こひな卓、いおいず刹夏",
+      "hashtag": "いおいず刹夏",
       "adminNote": "",
       "relatedLinks": []
     },
@@ -4825,74 +4845,35 @@
     },
     {
       "id": "stream_202",
-      "date": "2022/06/26",
-      "scenario": "ソープスクール 感想会",
-      "system": "CoC6版",
-      "gm": "高生紳士",
-      "characters": [],
-      "links": [
-        {
-          "label": "YouTube",
-          "url": "本編:https://www.youtube.com/watch?v=zxVngwmJpzw"
-        }
-      ],
-      "hashtag": "藍宮第三中学校ソプスク、藍宮第三中学校の美術室",
-      "adminNote": "",
-      "relatedLinks": []
-    },
-    {
-      "id": "stream_203",
-      "date": "2022/06/25",
+      "date": "2022/06/23",
       "scenario": "ソープスクール",
       "system": "CoC6版",
       "gm": "高生紳士",
       "characters": [],
       "links": [
         {
-          "label": "YouTube",
-          "url": "後編:https://www.youtube.com/watch?v=vbFfsh9ghKQ"
-        }
-      ],
-      "hashtag": "藍宮第三中学校ソプスク、藍宮第三中学校の美術室",
-      "adminNote": "",
-      "relatedLinks": []
-    },
-    {
-      "id": "stream_204",
-      "date": "2022/06/24",
-      "scenario": "ソープスクール ②",
-      "system": "CoC6版",
-      "gm": "高生紳士",
-      "characters": [],
-      "links": [
+          "label": "1",
+          "url": "https://www.youtube.com/watch?v=BCEicbQD-Yw"
+        },
         {
-          "label": "YouTube",
-          "url": "前編:https://www.youtube.com/watch?v=G6zh1hz4KCA"
-        }
-      ],
-      "hashtag": "藍宮第三中学校ソプスク、藍宮第三中学校の美術室",
-      "adminNote": "",
-      "relatedLinks": []
-    },
-    {
-      "id": "stream_205",
-      "date": "2022/06/23",
-      "scenario": "ソープスクール ①",
-      "system": "CoC6版",
-      "gm": "高生紳士",
-      "characters": [],
-      "links": [
+          "label": "2",
+          "url": "https://www.youtube.com/watch?v=G6zh1hz4KCA"
+        },
         {
-          "label": "YouTube",
-          "url": "前編:https://www.youtube.com/watch?v=BCEicbQD-Yw"
+          "label": "3",
+          "url": "https://www.youtube.com/watch?v=vbFfsh9ghKQ"
+        },
+        {
+          "label": "感想",
+          "url": "https://www.youtube.com/watch?v=zxVngwmJpzw"
         }
       ],
-      "hashtag": "藍宮第三中学校ソプスク、藍宮第三中学校の美術室",
+      "hashtag": "藍宮第三中学校ソプスク",
       "adminNote": "",
       "relatedLinks": []
     },
     {
-      "id": "stream_206",
+      "id": "stream_203",
       "date": "2022/06/21",
       "scenario": "私には止められない",
       "system": "CoC6版",
@@ -4904,12 +4885,12 @@
           "url": "本編:https://www.youtube.com/watch?v=4QnR2p2SwAI"
         }
       ],
-      "hashtag": "くぜくぜ卓、こしふしは止められない、オムニ屋、クトゥルフ神話TRPG、肉声セッション",
+      "hashtag": "こしふしは止められない",
       "adminNote": "",
       "relatedLinks": []
     },
     {
-      "id": "stream_207",
+      "id": "stream_204",
       "date": "2022/06/16",
       "scenario": "犬神憑き",
       "system": "CoC6版",
@@ -4918,15 +4899,15 @@
       "links": [
         {
           "label": "YouTube",
-          "url": "#四:https://www.youtube.com/watch?v=0YXDyIBVwfk"
+          "url": "https://www.youtube.com/watch?v=0YXDyIBVwfk"
         }
       ],
-      "hashtag": "くぜくぜ卓、四彩和歌憑き、オムニ屋、クトゥルフ神話TRPG、肉声セッション",
+      "hashtag": "四彩和歌憑き",
       "adminNote": "",
       "relatedLinks": []
     },
     {
-      "id": "stream_208",
+      "id": "stream_205",
       "date": "2022/06/09",
       "scenario": "鬼の棲む",
       "system": "CoC6版",
@@ -4943,7 +4924,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_209",
+      "id": "stream_206",
       "date": "2022/06/04",
       "scenario": "ふうたといっしょ。",
       "system": "エモクロア",
@@ -4960,7 +4941,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_210",
+      "id": "stream_207",
       "date": "2022/05/27",
       "scenario": "お前は誰だ",
       "system": "CoC6版",
@@ -4977,7 +4958,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_211",
+      "id": "stream_208",
       "date": "2022/04/27",
       "scenario": "おまえがちょうどいい",
       "system": "CoC6版",
@@ -4989,12 +4970,12 @@
           "url": "本編:https://www.youtube.com/watch?v=Dtk9rzLGtsU"
         }
       ],
-      "hashtag": "くぜくぜ卓、おまえが足腰ふらふら、オムニ屋、クトゥルフ神話TRPG、肉声セッション",
+      "hashtag": "おまえが足腰ふらふら",
       "adminNote": "",
       "relatedLinks": []
     },
     {
-      "id": "stream_212",
+      "id": "stream_209",
       "date": "2022/04/06",
       "scenario": "World End Juvenile",
       "system": "CoC6版",
@@ -5020,7 +5001,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_213",
+      "id": "stream_210",
       "date": "2022/04/01",
       "scenario": "エイプリルフール企画",
       "system": "CoC6版",
@@ -5037,7 +5018,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_214",
+      "id": "stream_211",
       "date": "2022/03/29",
       "scenario": "世界を視た男",
       "system": "CoC6版",
@@ -5049,12 +5030,12 @@
           "url": "本編:https://www.youtube.com/watch?v=x1NwRwmzkes"
         }
       ],
-      "hashtag": "くぜくぜ卓、足腰ふらふら男、オムニ屋、クトゥルフ神話TRPG、肉声セッション",
+      "hashtag": "足腰ふらふら男",
       "adminNote": "",
       "relatedLinks": []
     },
     {
-      "id": "stream_215",
+      "id": "stream_212",
       "date": "2022/03/20",
       "scenario": "カタシロ",
       "system": "CoC6版",
@@ -5066,16 +5047,16 @@
           "url": "本編:https://www.youtube.com/watch?v=RPhfoy-So_0"
         }
       ],
-      "hashtag": "あたたかな君に捧ぐ、アタシロ灰",
+      "hashtag": "アタシロ灰",
       "adminNote": "",
       "relatedLinks": []
     },
     {
-      "id": "stream_216",
+      "id": "stream_213",
       "date": "2022/03/04",
-      "scenario": "プルガトリウムの夜 /",
+      "scenario": "プルガトリウムの夜",
       "system": "CoC6版",
-      "gm": "【権利表記】",
+      "gm": "中尾ヤスヒロ",
       "characters": [],
       "links": [
         {
@@ -5087,16 +5068,16 @@
           "url": "https://www.youtube.com/watch?v=CeqocG4CKSM"
         }
       ],
-      "hashtag": "なかお卓",
+      "hashtag": "たかみやの夜",
       "adminNote": "",
       "relatedLinks": []
     },
     {
-      "id": "stream_217",
+      "id": "stream_214",
       "date": "2022/02/18",
-      "scenario": "すりきりおり夢の対価",
+      "scenario": "夢の対価",
       "system": "CoC6版",
-      "gm": "ぱぱびっぷTRPG",
+      "gm": "ぱぱびっぷ",
       "characters": [],
       "links": [
         {
@@ -5109,7 +5090,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_218",
+      "id": "stream_215",
       "date": "2022/02/13",
       "scenario": "激突！コズミックウェディングvsビッグバンブライド！！",
       "system": "CoC6版",
@@ -5126,7 +5107,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_219",
+      "id": "stream_216",
       "date": "2022/02/06",
       "scenario": "フェリーの怪",
       "system": "CoC6版",
@@ -5138,16 +5119,16 @@
           "url": "本編:https://www.youtube.com/watch?v=zQyZi6xEDtU"
         }
       ],
-      "hashtag": "くぜくぜ卓、フェリーのあしこし、オムニ屋、クトゥルフ神話TRPG、肉声セッション",
+      "hashtag": "フェリーのあしこし",
       "adminNote": "",
       "relatedLinks": []
     },
     {
-      "id": "stream_220",
+      "id": "stream_217",
       "date": "2021/12/22",
-      "scenario": "エモクロアTRPG",
+      "scenario": "",
       "system": "エモクロア",
-      "gm": "ぱぱびっぷTRPG",
+      "gm": "ぱぱびっぷ",
       "characters": [],
       "links": [
         {
@@ -5160,7 +5141,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_221",
+      "id": "stream_218",
       "date": "2021/12/18",
       "scenario": "黒い目玉",
       "system": "CoC6版",
@@ -5172,12 +5153,12 @@
           "url": "本編:https://www.youtube.com/watch?v=wlD5yRJePuU"
         }
       ],
-      "hashtag": "黒いあしこし、くぜくぜ卓、オムニ屋、クトゥルフ神話TRPG、肉声セッション",
+      "hashtag": "黒いあしこし",
       "adminNote": "",
       "relatedLinks": []
     },
     {
-      "id": "stream_222",
+      "id": "stream_219",
       "date": "2021/11/25",
       "scenario": "彼方からの君に捧ぐ",
       "system": "CoC6版",
@@ -5193,12 +5174,12 @@
           "url": "https://www.youtube.com/watch?v=eh6ybzZQ4Uc"
         }
       ],
-      "hashtag": "",
+      "hashtag": "あたたかなきみに捧ぐ",
       "adminNote": "",
       "relatedLinks": []
     },
     {
-      "id": "stream_223",
+      "id": "stream_220",
       "date": "2021/11/18",
       "scenario": "とある幸せな家族の話",
       "system": "CoC6版",
@@ -5214,29 +5195,12 @@
           "url": "https://www.youtube.com/watch?v=GUmk1CbElwQ"
         }
       ],
-      "hashtag": "柊紀家、柊紀家のアルバム",
+      "hashtag": "柊紀家",
       "adminNote": "",
       "relatedLinks": []
     },
     {
-      "id": "stream_224",
-      "date": "2021/10/28",
-      "scenario": "スイヒロ02でゲーム",
-      "system": "CoC6版",
-      "gm": "高生紳士",
-      "characters": [],
-      "links": [
-        {
-          "label": "YouTube",
-          "url": "本編:https://www.youtube.com/watch?v=_8wasOKbMtA"
-        }
-      ],
-      "hashtag": "水泳部の放課後",
-      "adminNote": "",
-      "relatedLinks": []
-    },
-    {
-      "id": "stream_225",
+      "id": "stream_221",
       "date": "2021/10/27",
       "scenario": "spell of the night.",
       "system": "CoC6版",
@@ -5253,7 +5217,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_226",
+      "id": "stream_222",
       "date": "2021/10/19",
       "scenario": "嗤う人間師",
       "system": "CoC6版",
@@ -5274,7 +5238,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_227",
+      "id": "stream_223",
       "date": "2021/09/26",
       "scenario": "すきばらの神",
       "system": "エモクロア",
@@ -5286,16 +5250,16 @@
           "url": "本編:https://www.youtube.com/watch?v=pQQOgVfZTmY"
         }
       ],
-      "hashtag": "しろっぷの神、くぜくぜ卓、オムニ屋、クトゥルフ神話TRPG、肉声セッション",
+      "hashtag": "しろっぷの神",
       "adminNote": "",
       "relatedLinks": []
     },
     {
-      "id": "stream_228",
+      "id": "stream_224",
       "date": "2021/09/05",
       "scenario": "水の街",
       "system": "CoC6版",
-      "gm": "ローゼアトの研究室",
+      "gm": "ローゼアト",
       "characters": [],
       "links": [
         {
@@ -5308,7 +5272,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_229",
+      "id": "stream_225",
       "date": "2021/08/31",
       "scenario": "スイムヒーローズ",
       "system": "CoC6版",
@@ -5325,11 +5289,11 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_230",
+      "id": "stream_226",
       "date": "2021/06/30",
       "scenario": "Monochrome Girl Re:",
       "system": "CoC6版",
-      "gm": "白夜 零兎 / Shiroya Reito",
+      "gm": "白夜零兎",
       "characters": [],
       "links": [
         {
@@ -5337,12 +5301,12 @@
           "url": "本編:https://www.youtube.com/watch?v=uYYMzWOUGCs"
         }
       ],
-      "hashtag": "初心者モノクロ、ぜろつーTRPG、ぜろつーらいぶ",
+      "hashtag": "初心者モノクロ",
       "adminNote": "",
       "relatedLinks": []
     },
     {
-      "id": "stream_231",
+      "id": "stream_227",
       "date": "2021/06/05",
       "scenario": "オリジナルの矜持",
       "system": "CoC6版",
@@ -5359,7 +5323,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_232",
+      "id": "stream_228",
       "date": "2021/05/08",
       "scenario": "リボルバー",
       "system": "CoC6版",
@@ -5376,7 +5340,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_233",
+      "id": "stream_229",
       "date": "2021/05/04",
       "scenario": "極彩色の学園",
       "system": "CoC6版",
@@ -5393,7 +5357,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_234",
+      "id": "stream_230",
       "date": "2020/06/19",
       "scenario": "人魚姫の物語",
       "system": "CoC6版",
@@ -5410,7 +5374,7 @@
       "relatedLinks": []
     },
     {
-      "id": "stream_235",
+      "id": "stream_231",
       "date": "2020/05/13",
       "scenario": "2時から始まる初心者クトゥルフ",
       "system": "CoC6版",
