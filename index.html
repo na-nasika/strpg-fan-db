@@ -49,7 +49,6 @@
     </style>
 </head>
 <body class="bg-stone-100/50 text-slate-800 antialiased selection:bg-stone-200 selection:text-stone-900">
-
     <div x-data="app()" x-init="initApp()" class="max-w-6xl mx-auto px-4 py-6 sm:py-8" x-cloak>
         
         <header class="mb-5 sm:mb-6 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 pb-5 border-b border-stone-200">
@@ -69,13 +68,11 @@
                 </div>
             </div>
         </header>
-
         <div class="bg-white p-3 sm:p-4 rounded-2xl border border-stone-200 mb-6 space-y-3 shadow-sm">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                 <div>
                     <input type="text" x-model="searchQuery" placeholder="🔍 シナリオ、PL、PCなど..." class="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent transition-all">
                 </div>
-
                 <div class="md:col-span-2 flex flex-col sm:flex-row sm:items-center gap-2">
                     <div class="flex items-center w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-0.5">
                         <span class="text-[11px] font-bold text-stone-400 mr-2 whitespace-nowrap sm:hidden">開始</span>
@@ -88,39 +85,33 @@
                     </div>
                 </div>
             </div>
-
             <div class="flex flex-wrap items-center justify-between gap-3 pt-2.5 border-t border-stone-100 text-xs">
                 <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
                     <div class="inline-flex gap-1 bg-stone-50 p-1 rounded-xl border border-stone-200">
                         <button @click="toggleRole('gm')" :class="ioriRole === 'gm' ? 'bg-red-500 text-white font-bold shadow-sm' : 'text-slate-600 hover:bg-stone-200/50'" class="px-3 py-1 rounded-lg transition-all cursor-pointer">GM</button>
                         <button @click="toggleRole('pl')" :class="ioriRole === 'pl' ? 'bg-red-500 text-white font-bold shadow-sm' : 'text-slate-600 hover:bg-stone-200/50'" class="px-3 py-1 rounded-lg transition-all cursor-pointer">PL</button>
                     </div>
-
                     <div class="inline-flex gap-1 bg-stone-50 p-1 rounded-xl border border-stone-200">
                         <button @click="toggleStatus('watched')" :class="selectedStatus === 'watched' ? 'bg-red-500 text-white font-bold shadow-sm' : 'text-slate-600 hover:bg-stone-200/50'" class="px-3 py-1 rounded-lg transition-all cursor-pointer">✅ 視聴済み</button>
                         <button @click="toggleStatus('unwatched')" :class="selectedStatus === 'unwatched' ? 'bg-red-500 text-white font-bold shadow-sm' : 'text-slate-600 hover:bg-stone-200/50'" class="px-3 py-1 rounded-lg transition-all cursor-pointer">⬜ 未視聴</button>
                     </div>
-
                     <button @click="toggleFavoriteFilter()" :class="showFavoritesOnly ? 'bg-red-500 text-white font-bold border-red-500 shadow-sm' : 'border-stone-300 text-slate-600 hover:bg-stone-50'" class="border px-3 py-1 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer">
                         <span class="w-2 h-2 rounded-full transition-colors" :class="showFavoritesOnly ? 'bg-white' : 'bg-red-400'"></span>
                         <span>お気に入り</span>
                     </button>
                 </div>
-
                 <div class="flex items-center gap-2 ml-auto sm:ml-0">
                     <template x-if="showFavoritesOnly && filteredStreams().length > 0">
                         <button @click="downloadAsImage()" class="bg-slate-800 hover:bg-slate-700 text-white font-medium px-3 py-1 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
                             <span>📸 画像で保存</span>
                         </button>
                     </template>
-
                     <button @click="toggleSortOrder()" class="border border-stone-300 hover:bg-stone-50 text-slate-600 font-medium px-3 py-1 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer">
                         <span x-text="sortOrder === 'desc' ? '📅 新しい順' : '📅 古い順'"></span>
                     </button>
                 </div>
             </div>
         </div>
-
         <div id="mobile-card-container" class="block md:hidden space-y-4">
             <template x-for="stream in filteredStreams()" :key="'card-'+stream.id">
                 <div @click="openModal(stream)" class="bg-white rounded-2xl border border-stone-200 p-4 shadow-sm space-y-3 transition-colors cursor-pointer relative">
@@ -138,7 +129,6 @@
                             <span class="text-[11px]" x-text="isWatched(stream.id) ? '視聴済み' : '未視聴'"></span>
                         </label>
                     </div>
-
                     <div class="flex gap-3 items-center">
                         <template x-if="getYoutubeId(stream.links)">
                             <div class="w-28 shrink-0 aspect-video h-[64px] bg-stone-50 rounded-lg overflow-hidden border border-stone-200 shadow-sm">
@@ -158,7 +148,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="flex items-center justify-between gap-2 pt-1" @click.stop>
                         <div class="text-[11px] text-slate-500 truncate flex items-center pt-0.5 pb-1 leading-loose">
                             <span class="font-bold text-slate-400 mr-1 select-none">GM:</span> 
@@ -173,7 +162,6 @@
                             </template>
                         </div>
                     </div>
-
                     <div class="bg-stone-50 rounded-xl p-2.5 text-[11px] border border-stone-200 flex flex-wrap gap-1 mt-1 items-center">
                         <span class="text-slate-400 font-bold mr-1 shrink-0 select-none">PL:</span>
                         <div class="flex flex-wrap gap-1 flex-1 items-center">
@@ -187,7 +175,6 @@
                 </div>
             </template>
         </div>
-
         <div class="hidden md:block bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse min-w-[950px]">
@@ -258,13 +245,10 @@
                 </table>
             </div>
         </div>
-
         <template x-if="filteredStreams().length === 0 && updatedAt !== '同期中...'">
             <div class="bg-white rounded-2xl border border-stone-200 p-12 text-center text-slate-400 font-medium shadow-sm">該当する配信データが見つかりません。</div>
         </template>
-
         <div id="dynamic-capture-studio"></div>
-
         <div x-show="modalOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40" @click.self="closeModal()" style="display: none;">
             <div class="bg-white rounded-2xl shadow-xl border border-stone-200 max-w-md w-full overflow-hidden flex flex-col max-h-[85vh] relative z-50">
                 <div class="bg-slate-900 px-6 py-4 flex justify-between items-center text-white shrink-0">
@@ -279,15 +263,18 @@
                             <div class="whitespace-pre-wrap" x-text="activeStream.adminNote"></div>
                         </div>
                     </template>
-
                     <template x-if="activeStream.relatedLinks && activeStream.relatedLinks.length > 0">
                         <div class="flex flex-col gap-1.5 pt-1">
                             <template x-for="rLink in activeStream.relatedLinks">
-                                <a :href="rLink.url" target="_blank" class="inline-block w-full bg-red-500 hover:bg-red-600 text-white text-center text-xs py-2 px-3 rounded-lg font-medium transition-colors shadow-sm" x-text="rLink.label"></a>
+                                <div class="text-xs text-slate-700 leading-relaxed">
+                                    <a :href="rLink.url" target="_blank" 
+                                       class="text-red-600 hover:text-red-700 font-medium underline decoration-dotted decoration-red-300 underline-offset-4 transition-colors">
+                                        <span x-text="rLink.label"></span><span class="no-underline">↗</span>
+                                    </a><span x-text="rLink.comment ? '　' + rLink.comment : ''"></span>
+                                </div>
                             </template>
                         </div>
                     </template>
-
                     <div class="space-y-4">
                         <template x-for="char in activeStream.characters">
                             <template x-if="char.profile || char.history || char.note || char.charasheetUrl">
@@ -308,33 +295,32 @@
                                                 <div class="text-slate-700 bg-stone-50 p-2 rounded-lg border border-stone-200" x-text="char.profile"></div>
                                             </div>
                                         </template>
-
                                         <template x-if="char.history">
                                             <div>
                                                 <div class="font-bold text-slate-400 text-[10px] uppercase tracking-wider mb-1">通過済みシナリオ</div>
                                                 <div class="grid grid-cols-1 gap-1.5">
                                                     <template x-for="line in parseHistoryLinks(char.history)">
-                                                        <template x-if="line.url">
-                                                            <a :href="line.url" target="_blank" class="flex items-center justify-between w-full bg-red-50 hover:bg-stone-100 text-stone-800 font-bold px-3 py-2 rounded-xl border border-stone-300 transition-colors text-left text-xs">
-                                                                <span x-text="'🔗 ' + line.title"></span>
-                                                                <span class="text-[10px] font-normal text-stone-400">↗</span>
-                                                            </a>
-                                                        </template>
-                                                        <template x-if="!line.url">
-                                                            <div class="text-slate-700 bg-stone-50 px-3 py-2 rounded-xl border border-stone-200 font-medium" x-text="line.title"></div>
-                                                        </template>
+                                                        <div>
+                                                            <template x-if="line.url">
+                                                                <a :href="line.url" target="_blank" class="flex items-center justify-between w-full bg-red-50 hover:bg-stone-100 text-stone-800 font-bold px-3 py-2 rounded-xl border border-stone-300 transition-colors text-left text-xs">
+                                                                    <span x-text="'🔗 ' + line.title"></span>
+                                                                    <span class="text-[10px] font-normal text-stone-400">↗</span>
+                                                                </a>
+                                                            </template>
+                                                            <template x-if="!line.url">
+                                                                <div class="text-slate-700 bg-stone-50 px-3 py-2 rounded-xl border border-stone-200 font-medium" x-text="line.title"></div>
+                                                            </template>
+                                                        </div>
                                                     </template>
                                                 </div>
                                             </div>
                                         </template>
-
                                         <template x-if="char.note">
                                             <div>
                                                 <div class="font-bold text-slate-400 text-[10px] uppercase tracking-wider mb-0.5">メモ</div>
                                                 <div class="text-slate-700 bg-stone-50 p-2 rounded-lg border border-stone-200 whitespace-pre-wrap" x-text="char.note"></div>
                                             </div>
                                         </template>
-
                                         <template x-if="char.charasheetUrl">
                                             <div class="pt-1">
                                                 <a :href="char.charasheetUrl" target="_blank" class="inline-flex items-center gap-1 text-red-500 font-bold hover:underline">
@@ -348,13 +334,10 @@
                             </template>
                         </template>
                     </div>
-
                 </div>
             </div>
         </div>
-
     </div>
-
     <script>
         function app() {
             return {
@@ -371,11 +354,9 @@
                 showFavoritesOnly: false,
                 modalOpen: false,
                 activeStream: {},
-
                 async initApp() {
                     const savedWatched = localStorage.getItem('iori_trpg_watched_ids');
                     if (savedWatched) this.watchedIds = JSON.parse(savedWatched);
-
                     const savedFavs = localStorage.getItem('iori_trpg_fav_ids');
                     if (savedFavs) this.favoriteIds = JSON.parse(savedFavs);
                     
@@ -391,31 +372,25 @@
                         this.updatedAt = "読み込みエラー";
                     }
                 },
-
                 formatDateOnly(dateTimeStr) {
                     if (!dateTimeStr || dateTimeStr === "同期中..." || dateTimeStr === "読み込みエラー") return dateTimeStr;
                     return dateTimeStr.split(" ")[0];
                 },
-
                 parseHistoryLinks(text) {
                     if (!text) return [];
                     return text.split('\n').map(line => {
                         const cleanLine = line.replace(/^[・\-\*\s]+/, '').trim();
                         if (!cleanLine) return null;
-
                         let title = cleanLine;
                         let url = null;
-
                         const httpIndex = cleanLine.indexOf('http');
                         if (httpIndex !== -1) {
                             title = cleanLine.substring(0, httpIndex).replace(/[:：\s]+$/, '').trim();
                             url = cleanLine.substring(httpIndex).trim();
                         }
-
                         return { title: title || '配信リンク', url: url };
                     }).filter(Boolean);
                 },
-
                 getYoutubeId(links) {
                     if (!links || links.length === 0) return null;
                     const ytLink = links.find(l => l.url && (l.url.includes('youtube.com') || l.url.includes('youtu.be')));
@@ -438,23 +413,18 @@
                     }
                     return null;
                 },
-
                 toggleRole(role) {
                     this.ioriRole = this.ioriRole === role ? "all" : role;
                 },
-
                 toggleStatus(status) {
                     this.selectedStatus = this.selectedStatus === status ? "all" : status;
                 },
-
                 toggleSortOrder() {
                     this.sortOrder = this.sortOrder === 'desc' ? 'asc' : 'desc';
                 },
-
                 toggleFavoriteFilter() {
                     this.showFavoritesOnly = !this.showFavoritesOnly;
                 },
-
                 filteredStreams() {
                     let result = this.streams.filter(stream => {
                         const query = this.searchQuery.toLowerCase();
@@ -468,7 +438,6 @@
                                 (c.pcName && c.pcName.toLowerCase().includes(query)) || 
                                 (c.plName && c.plName.toLowerCase().includes(query))
                             );
-
                         // 🛠️ 「四宮伊織」を基準にした絞り込みロジックへ変更
                         let matchIori = true;
                         if (this.ioriRole === 'gm') {
@@ -476,7 +445,6 @@
                         } else if (this.ioriRole === 'pl') {
                             matchIori = stream.characters.some(c => c.plName && c.plName.includes('四宮伊織'));
                         }
-
                         let matchDate = true;
                         const streamDateStr = stream.date.replace(/\//g, '-');
                         if (this.startDate && streamDateStr < this.startDate) matchDate = false;
@@ -486,24 +454,19 @@
                         const watched = this.isWatched(stream.id);
                         if (this.selectedStatus === 'watched') matchStatus = watched;
                         if (this.selectedStatus === 'unwatched') matchStatus = !watched;
-
                         let matchFav = true;
                         if (this.showFavoritesOnly) matchFav = this.isFavorite(stream.id);
-
                         return matchQuery && matchIori && matchDate && matchStatus && matchFav;
                     });
-
                     return result.sort((a, b) => {
                         const dateA = new Date(a.date);
                         const dateB = new Date(b.date);
                         return this.sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
                     });
                 },
-
                 isWatched(id) {
                     return this.watchedIds.includes(id);
                 },
-
                 toggleWatched(id) {
                     if (this.isWatched(id)) {
                         this.watchedIds = this.watchedIds.filter(wId => wId !== id);
@@ -512,11 +475,9 @@
                     }
                     localStorage.setItem('iori_trpg_watched_ids', JSON.stringify(this.watchedIds));
                 },
-
                 isFavorite(id) {
                     return this.favoriteIds.includes(id);
                 },
-
                 toggleFavorite(id) {
                     if (this.isFavorite(id)) {
                         this.favoriteIds = this.favoriteIds.filter(fId => fId !== id);
@@ -525,7 +486,6 @@
                     }
                     localStorage.setItem('iori_trpg_fav_ids', JSON.stringify(this.favoriteIds));
                 },
-
                 // 📸 画像の保存ロジック（背景色のみウォームグレーに合わせて調整）
                 async downloadAsImage() {
                     const studio = document.getElementById('dynamic-capture-studio');
@@ -581,12 +541,10 @@
                         studio.innerHTML = '';
                     }
                 },
-
                 openModal(streamData) {
                     this.activeStream = streamData;
                     this.modalOpen = true;
                 },
-
                 closeModal() {
                     this.modalOpen = false;
                     this.activeStream = {};
